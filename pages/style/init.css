@@ -1,0 +1,76 @@
+page {
+	background-color: #FBFBFB;
+}
+
+.f_float {
+	float: left;
+}
+
+.r_float {
+	float: right;
+}
+
+/* 日历选择时样式 */
+.uni-calender__body-date-week .uni-calender__date.uni-calender__date-current.uni-calender__active .uni-calender__circle-box {
+	background: #FFBB00 !important;
+	/* width:26px;
+	height:26px; */
+	border-radius: 50%;
+	opacity: 1;
+}
+
+.yellowColor {
+	color: #FFBB00;
+}
+
+/* 布置任务图标行高 */
+.byCourseBox .uni-icon {
+	line-height: 48rpx;
+	font-size: 20rpx;
+
+}
+
+/* 性别取消，确认按钮颜色 */
+.genderPopup .van-picker__cancel,
+.genderPopup .van-picker__confirm {
+	font-size: 14px;
+	color: #666;
+}
+
+
+/* 复选框 */
+/* .van-icon: before {
+	font-size: 32rpx;
+	line-height: 32rpx;
+
+} */
+
+
+/* 复选框 */
+.van-checkbox__icon {
+	width: 32rpx !important;
+	height: 32rpx !important;
+}
+
+.van-icon {
+	font-size: 32rpx !important;
+	line-height: 32rpx !important;
+}
+
+/* 搜索input框 */
+.van-field__input {
+	font-size: 26rpx !important;
+	height: 64rpx !important;
+	min-height: 64rpx !important;
+}
+
+.van-cell__left-icon-wrap,
+.van-cell__right-icon-wrap {
+	height: 64rpx !important;
+}
+
+.van-checkbox__icon-wrap,
+.van-checkbox__label {
+	/* line-height:112rpx !important; */
+
+}

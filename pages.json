@@ -1,0 +1,212 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+		
+		{
+			"path": "pages/view/home/index/index",
+			"style": {
+				"navigationBarTitleText": "学英语",
+				"usingComponents": {
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/home/details/studentDetails",
+			"style": {
+				"navigationBarTitleText": "学生学习详情"
+			}
+		},
+
+		{
+			"path": "pages/view/home/arrangementTasks/index",
+			"style": {
+				"navigationBarTitleText": "布置任务",
+				"usingComponents": {
+					"van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+					"van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index"
+				}
+			}
+		},
+
+		{
+			"path": "pages/view/mine/myInformation/index",
+			"style": {
+				"navigationBarTitleText": "我的资料",
+				"usingComponents": {
+					"van-picker": "../../../wxcomponents/dist/picker/index",
+					"van-datetime-picker": "../../../wxcomponents/dist/datetime-picker/index"
+				}
+			}
+		},
+
+		{
+			"path": "pages/view/mine/myInformation/changePassword",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"usingComponents": {
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/login/index",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"usingComponents": {
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/mine/approvalStudents/index",
+			"style": {
+				"navigationBarTitleText": "审批学生",
+				"usingComponents": {
+				  "van-tab": "../../../wxcomponents/dist/tab/index",
+				  "van-tabs": "../../../wxcomponents/dist/tabs/index",
+				  "van-toast": "../../../wxcomponents/dist/toast/index",
+				  "van-picker": "../../../wxcomponents/dist/picker/index",
+				  "van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+				  "van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
+				  "van-popup": "../../../wxcomponents/dist/popup/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/mine/classManagement/seeDetails",
+			"style": {
+				"navigationBarTitleText": "班级管理",
+				"usingComponents": {
+					"van-picker": "../../../wxcomponents/dist/picker/index",
+					"van-popup": "../../../wxcomponents/dist/popup/index",
+					"van-dialog": "../../../wxcomponents/dist/dialog/index",
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/mine/classManagement/revisionClass",
+			"style": {
+				"navigationBarTitleText": "修改班级信息",
+				"usingComponents": {
+					"van-picker": "../../../wxcomponents/dist/picker/index",
+					"van-popup": "../../../wxcomponents/dist/popup/index",
+					"van-dialog": "../../../wxcomponents/dist/dialog/index",
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/mine/classManagement/index",
+			"style": {
+				"navigationBarTitleText": "班级管理"
+			}
+		},
+		
+		{
+			"path": "pages/view/home/arrangementTasks/checkSelected",
+			"style": {
+				"navigationBarTitleText": "查看已选单词",
+				"usingComponents": {
+					"van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+					"van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index",
+					"van-popup": "../../../wxcomponents/dist/popup/index",
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+
+		{
+			"path": "pages/component/byLetter/index",
+			"style": {
+				"navigationBarTitleText": "布置任务-按字母选择",
+				"usingComponents": {
+					"van-search": "../../../wxcomponents/dist/search/index",
+					"van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+					"van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index"
+				}
+			}
+		},
+		{
+			"path": "pages/component/byCourse/index",
+			"style": {
+				"navigationBarTitleText": "布置任务-按班级选择",
+				"usingComponents": {
+					"van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+					"van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index"
+				}
+			}
+		},
+		{
+			"path": "components/lee-select/lee-select/lee-select",
+			"style": {
+				"navigationBarTitleText": "布置任务-按字母选择--索引列表",
+				"usingComponents": {
+					"van-checkbox": "../../../wxcomponents/dist/checkbox/index",
+					"van-checkbox-group": "../../../wxcomponents/dist/checkbox-group/index"
+				}
+			}
+		},
+		{
+			"path": "pages/view/home/details/ranking",
+			"style": {
+				"navigationBarTitleText": "任务排名"
+			}
+		},
+
+
+
+		{
+			"path": "pages/view/home/details/operationalDetails",
+			"style": {
+				"navigationBarTitleText": "任务详情",
+				"usingComponents": {
+					"van-dialog": "../../../wxcomponents/dist/dialog/index",
+					"van-toast": "../../../wxcomponents/dist/toast/index"
+				}
+			}
+		},
+
+		{
+			"path": "pages/view/mine/index/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#979DAB",
+		"selectedColor": "#FFBB00",
+		"borderStyle": "white",
+		"list": [{
+				"selectedIconPath": "static/images/homeTB.png",
+				"iconPath": "static/images/home.png",
+				"pagePath": "pages/view/home/index/index",
+				"text": "首页"
+			},
+			{
+				"selectedIconPath": "static/images/myTB.png",
+				"iconPath": "static/images/my.png",
+				"pagePath": "pages/view/mine/index/index",
+				"text": "我的"
+			}
+		]
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
+	}
+
+}
