@@ -18,13 +18,13 @@ minRequest.interceptors.request((request) => {
 
 // 响应拦截器
 minRequest.interceptors.response((response) => {
-	console.log(response.status)
-	if (response.data.code == 500) {
+	// console.log(response.status)
+	if (response.data.code == 508) {
 		uni.showToast({
 			title:'登录失效，请重新登录！',
 			icon:'none'
 		})
-		uni.redirectTo({
+		uni.navigateTo({
 			url: '/pages/view/login/index'
 		});
 	}

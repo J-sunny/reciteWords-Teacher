@@ -153,13 +153,8 @@
 			},
 			// 教师发布任务
 			publish() {
-				console.log(this.wordId)
 				if (this.classId.length == 0) {
 					Toast("请选择班级！")
-					return false
-				}
-				if (this.lookSelectedList.length==0) {
-					Toast("请选择要发布的单词！")
 					return false
 				}
 
@@ -225,14 +220,13 @@
 
 		},
 		onLoad(options) {
-			console.log(getApp().globalData.wordCount)
-			// console.log(JSON.parse(decodeURIComponent(options.selectWords)))
-			this.lookSelectedList = getApp().globalData.wordCount
+			// console.log(options)
+			console.log(JSON.parse(decodeURIComponent(options.selectWords)))
+			this.lookSelectedList = JSON.parse(decodeURIComponent(options.selectWords))
 			this.lookSelectedList.forEach(val => {
 				this.result.push(val.wordId.toString())
 				this.wordId.push(val.wordId)
 			})
-			console.log(this.wordId)
 		}
 	}
 </script>
@@ -280,9 +274,6 @@
 			color: rgba(151, 157, 171, 1);
 			margin-top: 12rpx;
 			line-height: 40rpx;
-			overflow: hidden;
-			text-overflow:ellipsis;
-			white-space: nowrap;
 		}
 
 		// 顶部
@@ -397,7 +388,7 @@
 
 			// 已选单词列表
 			.checkedWordList {
-				padding-bottom: 150rpx;
+				padding-bottom: 120rpx;
 
 				.listCon {
 					margin-top: 16rpx;

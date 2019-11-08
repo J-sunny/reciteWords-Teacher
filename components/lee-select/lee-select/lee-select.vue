@@ -189,9 +189,9 @@
 		},
 		mounted() {
 			this.getDisArray()
-			this.fSelectWords.forEach(val => {
-				this.result.push(val.wordId.toString())
-			})
+			// this.fSelectWords.forEach(val => {
+			// 	this.result.push(val.wordId.toString())
+			// })
 
 			// console.log(this.result)
 		},
@@ -238,6 +238,7 @@
 				this.$emit('chooseItem', item)
 			},
 			onChange(event) {
+				
 				this.result = event.detail
 				console.log(this.result)
 				console.log(this.listData)

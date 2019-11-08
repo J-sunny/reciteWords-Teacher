@@ -59,8 +59,8 @@
 
 		<!-- 删除学生弹框 -->
 		<van-dialog confirm-button-color="#FFBB00 " cancel-button-color="#CCCCCC" use-slot :show="showDelect"
-		 show-cancel-button @confirm="onConfirmDel()" @cancel="onCancelDel()">
-			<view class="dialogText">是否确定将﻿{{delectedName}}移出该班级？</view>
+		 show-cancel-button @confirm="onConfirmDel()" @cancel="onCancelDel()" className='van_dialog'>
+			<view class="dialogText">是否确定将﻿<label style="color:#ff5c5c ;">{{delectedName}}</label>移除？移除后，该学生将在“<label style="color:#FFBB00 ;">审批学生-待分配</label>”里。</view>
 		</van-dialog>
 		<van-toast id="van-toast" />
 	</view>
@@ -80,8 +80,8 @@
 				classLists: [],
 				delectedId: "",
 				delectedName: "",
-				classId:"",
-				belongSchoolId:""
+				classId: "",
+				belongSchoolId: ""
 			}
 		},
 		methods: {
@@ -126,7 +126,7 @@
 				}).then(data => {
 					if (data.code == 200) {
 						Toast("删除成功")
-						this.classList()
+						this.classList(this.classId)
 					} else {
 						Toast(data.msg)
 					}
@@ -137,17 +137,17 @@
 				this.showDelect = false
 				console.log(this.showDelect)
 			},
-			// 获取班级id获取学生信息
+			// 根据班级id获取学生信息
 			classList(classId) {
 				console.log(classId)
 				this.$minApi.getStudentListByClassId({
-					classId:classId
+					classId: classId
 				}).then(data => {
 					console.log(data)
 					this.classLists = data.data
 					// this.gradeName = data.data[0].classYear
 					// this.classId=data.data[0].classId
-					this.belongSchoolId=data.data[0].belongSchoolId
+					this.belongSchoolId = data.data[0].belongSchoolId
 				})
 			},
 			// 修改班级信息
@@ -171,8 +171,8 @@
 		onLoad(options) {
 			this.classList(options.classId)
 			this.className = options.className
-			this.classId=options.classId
-			this.gradeName=options.classYear
+			this.classId = options.classId
+			this.gradeName = options.classYear
 		}
 	}
 </script>
@@ -444,11 +444,15 @@
 			}
 		}
 
+		.van_dialog {
+			
+		}
+
 		// 删除弹框内容
 		.dialogText {
 			margin: 0 auto;
 			width: 540rpx;
-			padding: 60rpx 104rpx 34rpx;
+			padding: 60rpx 20rpx 34rpx;
 			font-size: 32rpx;
 			font-family: PingFang SC;
 			font-weight: 400;

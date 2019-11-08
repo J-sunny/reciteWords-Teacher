@@ -56,8 +56,14 @@
 				</view>
 				<!-- 最近一周-按月查看 -->
 				<view class="lookChange">
-					<label :class="toDayactive=='week'?'active':''" class="week" @click="toDayChange('week')">最近一周</label>
-					<label :class="toDayactive=='month'?'active':''" class="month" @click="toDayChange('month')">按月查看</label>
+					<view :class="toDayactive=='week'?'active':''" class="week" @click="toDayChange('week')">
+						<view class="">最近一周</view>
+						<view class='line'></view>
+					</view>
+					<view :class="toDayactive=='month'?'active':''" class="month" @click="toDayChange('month')">
+						<view class="">按月查看</view>
+						<view class='line'></view>
+					</view>
 				</view>
 				<!-- 柱状图 -->
 				<view class="qiun-columns">
@@ -83,8 +89,17 @@
 				</view>
 				<!-- 最近一周-按月查看 -->
 				<view class="lookChange">
-					<label :class="timesActive=='week'?'active':''" class="week" @click="timesChange('week')">最近一周</label>
-					<label :class="timesActive=='month'?'active':''" class="month" @click="timesChange('month')">按月查看</label>
+					<label :class="timesActive=='week'?'active':''" class="week" @click="timesChange('week')">
+						<view class="">
+							最近一周
+						</view>
+						<view class="line"></view>
+						</label>
+					<view :class="timesActive=='month'?'active':''" class="month" @click="timesChange('month')">
+						<view class="">
+							按月查看
+						</view>
+						<view class="line"></view></view>
 				</view>
 				<!-- 折线图 -->
 				<view class="qiun-columns">
@@ -94,8 +109,8 @@
 				</view>
 				<!-- 当日学习 -->
 				<view class="todayStudyBox">
-					<label class="study">{{timesActive=='week'?'当日学习：':'当月学习：'}}<label class="grayColor">{{timeChartList.lengthOfStudy}}分钟</label></label>
-					<label class="review">总时长：<label class="grayColor">{{timeChartList.lengthOfStudyCount}}分钟</label></label>
+					<label class="study">{{timesActive=='week'?'当日学习：':'当月学习：'}}<label class="grayColor">{{(timeChartList.lengthOfStudy/60).toFixed(2)}}分钟</label></label>
+					<label class="review">总时长：<label class="grayColor">{{(timeChartList.lengthOfStudyCount/60).toFixed(2)}}分钟</label></label>
 				</view>
 		
 			</view>
@@ -151,7 +166,7 @@
 					categories: [],
 					series: [{
 						data: [],
-						name: ""
+						name: "学习时长"
 					}]
 				};
 				if (val == 'week') {
@@ -159,7 +174,7 @@
 						studentId: this.studentId,
 						type: "week"
 					}).then(data => {
-						console.log(data)
+						// console.log(data)
 						let arrX = []
 						let arrY = []
 						this.timeChartList = data.data
@@ -176,7 +191,7 @@
 									if (data == val.recordTime.slice(5)) {
 										arrX.indexOf(data)
 										console.log(arrX.indexOf(data))
-										arrY[arrX.indexOf(data)] = val.lengthOfStudy
+										arrY[arrX.indexOf(data)] = (val.lengthOfStudy/60).toFixed(2)
 									}
 								})
 							})
@@ -211,7 +226,7 @@
 									if (data == val.recordTime.slice(5, 7)) {
 										arrX.indexOf(data)
 										console.log(arrX.indexOf(data))
-										arrY[arrX.indexOf(data)] = val.lengthOfStudy
+										arrY[arrX.indexOf(data)] = (val.lengthOfStudy/60).toFixed(2)
 									}
 								})
 							})
@@ -262,10 +277,10 @@
 						if (this.worfChartList.studentStudyInfoVOList.length != 0) {
 							arrX.forEach(data => {
 								this.worfChartList.studentStudyInfoVOList.forEach(val => {
-									console.log(val.recordTime.slice(5))
+									// console.log(val.recordTime.slice(5))
 									if (data == val.recordTime.slice(5)) {
 										arrX.indexOf(data)
-										console.log(arrX.indexOf(data))
+										// console.log(arrX.indexOf(data))
 										arrStudy[arrX.indexOf(data)] = val.exerciseCount
 										arrReview[arrX.indexOf(data)] = val.reviewCount
 									}
@@ -276,7 +291,7 @@
 						ColumnStack.series[0].data = arrStudy
 						ColumnStack.series[1].data = arrReview
 						_self.showColumnStack("canvasColumnStack", ColumnStack);
-						console.log(ColumnStack)
+						// console.log(ColumnStack)
 					})
 
 				}
@@ -646,13 +661,16 @@
 					font-weight: 400;
 					color: rgba(151, 157, 171, 1);
 					margin-bottom: 40rpx;
+					overflow: hidden;
 
 					.week {
 						margin-left: 228rpx;
+						float: left;
 					}
 
 					.month {
 						margin-left: 56rpx;
+						float: left;
 					}
 
 					.active {
@@ -660,6 +678,12 @@
 						font-family: PingFang SC;
 						font-weight: 800;
 						color: rgba(46, 53, 72, 1);
+						.line {
+							border-bottom: 4rpx solid #FFBB00;
+							width: 32rpx;
+							margin-left: 46rpx;
+							margin-top: 16rpx;
+						}
 					}
 				}
 			}

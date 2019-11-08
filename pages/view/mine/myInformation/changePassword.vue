@@ -116,7 +116,7 @@
 						userIdenty:"1"
 					}).then(data => {
 						console.log(data)
-						// Toast('修改成功！')
+						Toast(data.msg)
 					})
 				}
 			}

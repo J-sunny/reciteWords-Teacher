@@ -1,7 +1,7 @@
 <template>
 	<view class="byLetterBox">
 		<!-- 搜索框 -->
-		<view class="searchs" v-if="false">
+		<view class="searchs">
 			<!-- 	<view class="searchBox">
 				<input class="inputText" type="text" placeholder='输入你想要的内容' confirm-type='search' value="">
 				<image class="searchPic" src="../../../static/images/search.png" mode=""></image>
@@ -46,7 +46,18 @@
 				listData: allWord,
 				value: '',
 				quickPanelData: [
-					
+					// {
+					// 	title: '当前城市',
+					// 	navName: '当前',
+					// 	data: ['上海'],
+					// 	height: 150
+					// },
+					// {
+					// 	title: '热门城市',
+					// 	navName: '热',
+					// 	data: ['上海', '北京', '成都', '昆明', '西安'],
+					// 	height: 224
+					// }
 				]
 			};
 		},
@@ -73,19 +84,28 @@
 				console.log(event.detail)
 			},
 			getHeight() {
-				
+				// var query = wx.createSelectorQuery();
+				// query.select('page').boundingClientRect()
+				// query.exec(function(res) {
+				// 	//res就是 所有标签为mjltest的元素的信息 的数组
+				// 	console.log(res);
+				// 	//取高度
+				// 	console.log(res[0].height);
+				// })
 			},
 			// 获取所有单词列表
 			allWordList() {
 				this.$minApi.allWordList().then(data => {
 					this.listData = data.data
+					// console.log(data.data)
 				})
 			}
 		},
 		created() {
 			this.getHeight()
 			this.allWordList()
-			
+			// console.log(allWord)
+			// console.log(this.fSendWords)
 		}
 
 	}

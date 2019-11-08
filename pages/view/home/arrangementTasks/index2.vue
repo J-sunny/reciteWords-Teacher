@@ -27,18 +27,16 @@
 		<!-- 内容 -->
 		<view class="contentBox">
 			<!-- 按课程 -->
-			<byCourse @sendCwords='getCwords()' @sendFlag='getFlag()' :fSendWords='wordCount' :sendFlaf='checkAllCourse' v-if="show=='course'"
-			 ref="allcourse"></byCourse>
+			<byCourse @sendCwords='getCwords()' @sendFlag='getFlag()' :fSendWords='wordCount' :sendFlaf='checkAllCourse' v-if="show=='course'" ref="allcourse"></byCourse>
 			<!-- 按字母 -->
-			<buLetter v-if="show=='word'"></buLetter>
+			<buLetter @sendFlwords='getLwords()' :fSendWords='wordCount' v-if="show=='word'"></buLetter>
 		</view>
 		<!-- 底部全选 -->
 		<view class="allCheck">
 			<!-- <label class="radio"> -->
 			<!-- <checkbox  color="#FFBB00" style="transform:scale(1)" @tap="checkAll=!checkAll" :checked="checkAll"/>全选 -->
 			<!-- 按课程全选 -->
-			<van-checkbox v-if="show=='course'" @click.native="getSelectAllCourse()" class="radio" :value="checkAllCourse"
-			 @change="selectAllCourse()" checked-color="#FFBB00">全选</van-checkbox>
+			<van-checkbox v-if="show=='course'"  @click.native="getSelectAllCourse()"  class="radio" :value="checkAllCourse" @change="selectAllCourse()"  checked-color="#FFBB00">全选</van-checkbox>
 			<!-- 按字母全选 -->
 			<van-checkbox v-if="show=='word'" class="radio" :value="checkAllWord" @change="selectAllWord()" checked-color="#FFBB00">全选</van-checkbox>
 			<!-- </label> -->
@@ -62,8 +60,7 @@
 				show: 'course',
 				checkAllCourse: false,
 				checkAllWord: false,
-				wordCount: [],
-				// selectWords: getApp().globalData.selectWords
+				wordCount: []
 			}
 		},
 		components: {
@@ -74,21 +71,18 @@
 			// 查看已选单词跳转
 			linkTo() {
 				uni.navigateTo({
-					url: '/pages/view/home/arrangementTasks/checkSelected',
-					// url: '/pages/view/home/arrangementTasks/checkSelected?selectWords=' + encodeURIComponent(JSON.stringify(this.wordCount)),
+					url: '/pages/view/home/arrangementTasks/checkSelected?selectWords=' + encodeURIComponent(JSON.stringify(this.wordCount)),
 				})
 			},
 			// 获取按课程传过来的数据
 			getCwords(data) {
 				// console.log(data)
 				this.wordCount = data
-				getApp().globalData.wordCount = data
 			},
 			// 获取按字母传过来的值
 			getLwords(data) {
 				console.log(data)
 				this.wordCount = data
-				getApp().globalData.wordCount = data
 			},
 
 			// 返回
@@ -99,27 +93,37 @@
 			},
 			// 课程全选
 			selectAllCourse(event) {
+				// console.log(event.detail)
 				this.checkAllCourse = event.detail
+				// this.getSelectAllCourse()
 			},
-			getSelectAllCourse() {
+			getSelectAllCourse(){
 				this.$refs.allcourse.onChange()
 			},
 			// 字母全选
 			selectAllWord(event) {
+				// console.log(event.detail)
 				this.checkAllWord = event.detail
 			},
 			// 获取全选按钮状态
-			getFlag(data) {
-				this.checkAllCourse = data
+			getFlag(data){
+				console.log(data)
+				this.checkAllCourse=data
 			}
 
 		},
 		created() {
-
-		},
-		onShow() {
-			// console.log(this.selectWords)
-			// console.log(getApp().globalData.selectWords)
+			// uni.getStorage({
+			// 	key: 'selectedWords',
+			// 	success: (data) => {
+			// 		console.log(data)
+			// 		this.wordCount = data.data.length
+			// 		// data.data.forEach(val => {
+			// 		// 	this.result.push(val.wordId.toString())
+			// 		// })
+			// 		// console.log(this.result)
+			// 	}
+			// });
 		}
 	}
 </script>

@@ -15,6 +15,7 @@
 						 :key='item' @tap="optionsthesauruNameActive(item.thesaurusName,item.thesaurusId)">{{item.thesaurusName}}</view>
 					</scroll-view>
 				</view>
+
 				<view>
 					<view class="courseType courseBorder" @tap="activeChapter()">
 						<label class="typeTitle">{{chapterTitle}}</label>
@@ -26,6 +27,7 @@
 						 :key='index' @tap="optionschapterActive(item.belong_chapter)">{{item.belong_chapter}}</view>
 					</scroll-view>
 				</view>
+
 				<view>
 					<view class="courseType" @tap="activeLesson()">
 						<label class="typeTitle" for="">{{lessonTitle}}</label>
@@ -37,6 +39,8 @@
 						 :key='index' @tap="optionslessonActive(item.belong_lesson)">{{item.belong_lesson}}</view>
 					</scroll-view>
 				</view>
+
+
 			</view>
 		</view>
 
@@ -106,21 +110,24 @@
 				lookSelects: false,
 				wordCount: 0,
 
+
 				list: [],
 				result: [],
 				thesaurusLists: [],
 				chapterLists: [],
 				lessonLists: [],
 				arr: [],
-				allList: []
-
+				arrb: [],
+				allList: [],
+				listb: [],
+				listc: []
 
 			};
 		},
 		mounted() {
-			// this.fSendWords.forEach(val => {
-			// 	this.result.push(val.wordId.toString())
-			// })
+			this.fSendWords.forEach(val => {
+				this.result.push(val.wordId.toString())
+			})
 		},
 		components: {
 			uniIcon
@@ -130,10 +137,9 @@
 				this.chapterList(this.thesauruNameTitle)
 				this.chapterTitle = "全部"
 				this.lessonTitle = "全部"
-				this.chapterLists = []
-				this.lessonLists = []
-				this.list = []
-				this.wordListByChapter()
+				this.chapterLists = [],
+					this.lessonLists = [],
+					this.list = []
 			},
 			chapterTitle() {
 				this.lessonList(this.thesauruNameTitle, this.chapterTitle)
@@ -190,6 +196,7 @@
 				this.show = !this.show
 				this.thesauruNameShow = false
 				this.thesauruNameActive = !this.thesauruNameActive
+				this.wordListByChapter()
 			},
 			// 选择章名称
 			optionschapterActive(val) {
@@ -279,10 +286,8 @@
 				}, [])
 				console.log(this.allList)
 				console.log(this.listb)
-
 				this.$emit('sendCwords', this.listb)
 			},
-
 
 			// 复选框组改变事件
 			onChanges(event) {
@@ -324,8 +329,7 @@
 				console.log(this.arrb)
 				// 传值给父级
 				this.$emit('sendCwords', this.arrb)
-				// getApp().globalData.selectWords = this.arrb
-				console.log(getApp().globalData.selectWords)
+
 			},
 
 			// 获取课程下拉列表
@@ -333,13 +337,14 @@
 				this.$minApi.thesaurusList({}).then(data => {
 					this.thesaurusLists = data.data
 				})
+				console.log(this.thesauruNameTitle)
 			},
 			// 获取章下拉列表
 			chapterList(thesauruName) {
 				this.$minApi.chapterList({
 					thesauruName: thesauruName
 				}).then(data => {
-					// console.log(data)
+					console.log(data)
 					this.chapterLists = data.data
 					if (data.data.length != 0) {}
 				})
@@ -350,7 +355,7 @@
 					chapter: chapter,
 					thesauruName: thesauruName
 				}).then(data => {
-					// console.log(data)
+					console.log(data)
 					this.lessonLists = data.data
 					if (data.data.length != 0) {
 						this.wordListByChapter()
@@ -382,27 +387,6 @@
 					chapter: titleLesson,
 					lesson: titleChapter
 				}).then(data => {
-					// let flag = false
-					// this.wordCount = getApp().globalData.wordCount
-					// console.log(getApp().globalData.wordCount)
-					// console.log(data)
-					// if (getApp().globalData.wordCount) {
-					// 	data.data.forEach(val => {
-					// 		if (this.wordCount.indexOf(val) == -1) {
-					// 			console.log(val)
-					// 			flag = false
-					// 		} else {
-					// 			flag = true
-					// 		}
-					// 	})
-					// 	console.log(flag)
-					// 	this.$emit('sendFlag', flag)
-					// }
-					
-					
-					
-					
-					console.log(data)
 					this.list = data.data
 					this.list.forEach(data => {
 						data.flag = false

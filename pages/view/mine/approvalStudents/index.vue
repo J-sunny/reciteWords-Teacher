@@ -18,7 +18,7 @@
 						<view class="frame" v-for="item in notApprovalStudentList" :key='item.studentId'>
 							<!-- 左边 -->
 							<view class="frameLeft">
-								<view class="studentName">{{item.studentName}}</view>
+								<view class="studentName">{{item.studentAccount}}</view>
 								<view class="stuName">年级：<label class="stuNames">{{item.classYear}}级</label></view>
 								<view class="stuName">班级：<label class="stuNames">{{item.className}}级</label></view>
 								<view class="stuName">学号：<label class="stuNames">{{item.studentNum}}</label></view>
@@ -26,26 +26,25 @@
 							<!-- 右边通过、不通过按钮 -->
 							<view class="frameRight">
 								<label class="adopt" @click="adopt(item.studentId,item.studentClass)">通过</label>
-								<label class="noPassage" @click="notPass()">不通过</label>
+								<label class="noPassage" @click="notPass(item.studentId,item.studentClass)">不通过</label>
 							</view>
 						</view>
-
 					</view>
-
 				</van-tab>
 				<van-tab title="已审批">
 					<view class="frameBox">
 						<view class="frame" v-for="(item,index) in approvalStudentList" :key='item'>
 							<!-- 左边 -->
 							<view class="frameLeft">
-								<view class="studentName">{{item.studentName}}</view>
+								<view class="studentName">{{item.studentAccount}}</view>
 								<view class="stuName">年级：<label class="stuNames">{{item.classYear}}级</label></view>
 								<view class="stuName">班级：<label class="stuNames">{{item.className}}班</label></view>
 								<view class="stuName">学号：<label class="stuNames">{{item.studentNum}}</label></view>
 							</view>
 							<!-- 右边通过、不通过按钮 -->
 							<view class="frameRights">
-								<view class="statused">已通过</view>
+								<view class="statused" v-if="item.student_status==1">已通过</view>
+								<view class="statused" v-if="item.student_status==2">未通过</view>
 							</view>
 						</view>
 					</view>
@@ -55,7 +54,7 @@
 						<view class="allocatedBox" v-for="item in pendingLists" :key="item.studentId">
 							<!-- 左边 -->
 							<view class="frameLeft">
-								<view class="studentName">{{item.studentName}}</view>
+								<view class="studentName">{{item.studentAccount}}</view>
 								<view class="stuName">年级：<label class="stuNames">{{item.studentGrade}}级</label></view>
 								<view class="stuName">学号：<label class="stuNames">{{item.studentNum}}</label></view>
 							</view>
@@ -94,9 +93,9 @@
 				show: false,
 				studentId: "",
 				classLists: [],
-				approvalStudentList:[],
-				notApprovalStudentList:[]
-				
+				approvalStudentList: [],
+				notApprovalStudentList: []
+
 			}
 		},
 		methods: {
@@ -117,43 +116,59 @@
 				})
 			},
 			// 获取已审批学生
-			getApprovalStudentList(){
-				this.$minApi.getApprovalStudentList({}).then(data=>{
-					this.approvalStudentList=data.data
+			getApprovalStudentList() {
+				this.$minApi.getApprovalStudentList({}).then(data => {
+					this.approvalStudentList = data.data
 				})
 			},
 			// 获取未审批学生
-			getNotApprovalStudentList(){
-				this.$minApi.getNotApprovalStudentList({}).then(data=>{
-					this.notApprovalStudentList=data.data
+			getNotApprovalStudentList() {
+				this.$minApi.getNotApprovalStudentList({}).then(data => {
+					this.notApprovalStudentList = data.data
 				})
 			},
-			
+
 			// 选中mtab
 			onChange(event) {
 				console.log(event)
+				if (event.detail.title == '未审批') {
+					this.getNotApprovalStudentList()
+				}
+				if (event.detail.title == '已审批') {
+					this.getApprovalStudentList()
+				}
+				if (event.detail.title == '待分配') {
+					this.pendingList()
+					this.classList()
+				}
 			},
 			// 通过
-			adopt(studentId,classId) {
+			adopt(studentId, classId) {
 				this.$minApi.approvalStudent({
-					studentId: studentId
+					studentId: studentId,
+					approvalStatus: 1
 				}).then(data => {
 					if (data.code == 200) {
-						Toast("加入班级成功！")
+						Toast(data.msg)
+						this.getNotApprovalStudentList()
+					} else {
+						Toast(data.msg)
+					}
+				})
+			},
+			// 不通过
+			notPass(studentId, classId) {
+				this.$minApi.approvalStudent({
+					studentId: studentId,
+					approvalStatus: 2
+				}).then(data => {
+					if (data.code == 200) {
+						Toast(data.msg)
 						this.getNotApprovalStudentList()
 					} else {
 						Toast(data.msg)
 					}
 					// console.log(data)
-				})
-				Toast("通过")
-			},
-			// 不通过
-			notPass() {
-				// Toast("不通过")
-				uni.showToast({
-					title:'不通过',
-					icon:'none'
 				})
 			},
 			// 未分配
@@ -198,7 +213,7 @@
 			// 获取当前老师班级下拉列表
 			classList() {
 				this.$minApi.classList({
-					
+
 				}).then(data => {
 					data.data.forEach(val => {
 						val.text = val.className
@@ -209,9 +224,9 @@
 
 		},
 		created() {
-			this.pendingList()
-			this.classList()
-			this.getApprovalStudentList()
+			// this.pendingList()
+			// this.classList()
+			// this.getApprovalStudentList()
 			this.getNotApprovalStudentList()
 		}
 

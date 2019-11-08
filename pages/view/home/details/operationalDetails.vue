@@ -28,7 +28,7 @@
 		<view class="contentBox">
 			<!-- 班级 -->
 			<view class="classMajor">
-				班级：<label class='major'> XX专业XX系{{className}}（ <label class='yellowColor'>{{taskDetailsLists.completeStudentNum}}</label>
+				班级：<label class='major'> {{className}}（ <label class='yellowColor'>{{taskDetailsLists.completeStudentNum}}</label>
 					/{{taskDetailsLists.studentTotal}}人）</label>
 			</view>
 			<!-- 框框 -->
